@@ -41,6 +41,7 @@ export default function App() {
         toggleMode={toggleMode}
         setPageNumber={setPageNumber}
         category={category}
+        query={query}
       />
       <LoadingBar
         color="#f11946"

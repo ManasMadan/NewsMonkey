@@ -5,9 +5,14 @@ export default function Navbar(props) {
   const [width, setWidth] = useState(window.innerWidth);
 
   const handleSearch = () => {
-    props.setLoading(true);
     const search = document.getElementById("search");
-    props.setQuery(search.value);
+    if (search.value !== props.query) {
+      console.log("Manas");
+      props.setLoading(true);
+      props.setQuery(search.value);
+    } else {
+      alert("Search for a Different Query");
+    }
   };
 
   window.addEventListener("resize", () => {
@@ -157,13 +162,7 @@ export default function Navbar(props) {
                   style={{ width: "15vw", minWidth: "200px" }}
                   autoComplete={"off"}
                 />
-                <button
-                  className="btn btn-primary mx-2"
-                  onClick={() => {
-                    handleSearch();
-                    props.setLoading(true);
-                  }}
-                >
+                <button className="btn btn-primary mx-2" onClick={handleSearch}>
                   Go
                 </button>
               </div>
@@ -205,6 +204,7 @@ export default function Navbar(props) {
 
 Navbar.propTypes = {
   category: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired,
   setCategory: PropTypes.func.isRequired,
   setQuery: PropTypes.func.isRequired,
   darkTheme: PropTypes.bool.isRequired,
