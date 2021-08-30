@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 export default function Navbar(props) {
   const [width, setWidth] = useState(window.innerWidth);
 
   const handleSearch = () => {
+    props.setLoading(true);
     const search = document.getElementById("search");
     props.setQuery(search.value);
   };
@@ -12,6 +13,14 @@ export default function Navbar(props) {
   window.addEventListener("resize", () => {
     setWidth(window.innerWidth);
   });
+
+  useEffect(() => {
+    document.getElementById("search").addEventListener("keyup", (e) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    });
+  }, []);
 
   return (
     <nav className={"navbar navbar-expand-lg navbar-dark bg-dark sticky-top"}>

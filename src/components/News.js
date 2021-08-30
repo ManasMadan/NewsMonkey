@@ -107,7 +107,9 @@ export default function News(props) {
   } else {
     return (
       <div
-        className="d-flex align-items-center justify-content-center"
+        className={`d-flex align-items-center justify-content-center ${
+          props.darkTheme ? "text-light" : ""
+        }`}
         style={{ width: "100vw", height: "80vh" }}
       >
         <h1>No Articles Found</h1>
