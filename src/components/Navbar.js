@@ -16,14 +16,14 @@ export default function Navbar(props) {
   return (
     <nav className={"navbar navbar-expand-lg navbar-dark bg-dark sticky-top"}>
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <span className="navbar-brand">
           NewsMonkey -
           <span className="text-warning">
             {` ${
               props.category.charAt(0).toUpperCase() + props.category.slice(1)
             }`}
           </span>
-        </a>
+        </span>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav d-flex align-items-center">
             <li className="nav-item">
