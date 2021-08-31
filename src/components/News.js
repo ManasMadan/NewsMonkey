@@ -8,7 +8,6 @@ export default function News(props) {
   const [articles, setArticles] = useState([]);
   const [articlesCount, setArticlesCount] = useState(0);
   const [width, setWidth] = useState(window.innerWidth);
-  // const [loading, setLoading] = useState(true);
 
   let style1 = props.darkTheme
     ? {
@@ -49,11 +48,11 @@ export default function News(props) {
 
   const fetchMoreData = async () => {
     const url = `${props.url}&page=${props.pageNumber}`;
-    props.setPageNumber(props.pageNumber + 1);
     let data = await fetch(url);
     let parsedData = await data.json();
     setArticlesCount(parsedData.totalResults);
     setArticles(articles.concat(parsedData.articles));
+    props.setPageNumber(props.pageNumber + 1);
   };
 
   window.addEventListener("resize", () => {
@@ -62,7 +61,6 @@ export default function News(props) {
 
   useEffect(() => {
     updateNews(props.url);
-    // eslint-disable-next-line
   }, [props.url]);
 
   if (props.loading) {
@@ -75,8 +73,12 @@ export default function News(props) {
           next={fetchMoreData}
           hasMore={articlesCount !== articles.length && props.pageNumber <= 5}
           loader={<LoaderComponent type={2} />}
+          endMessage={
+            <p className={`text-center ${props.darkTheme ? "text-light" : ""}`}>
+              <b>No More Atricles To Show</b>
+            </p>
+          }
         >
-          {/* eslint-disable-next-line */}
           <div className="container" style={style1} style={{ width: "100vw" }}>
             <div className="row align-items-center">
               {articles.map((element) => {
